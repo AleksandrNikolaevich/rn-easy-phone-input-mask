@@ -17,6 +17,7 @@ export declare type PhoneInputProps = {
 declare type Handlers = {
     formatValue: (val: string | undefined) => string;
     metadata: Metadata;
+    fullMetadata: Metadata;
     setCountryCode: (country: CountryCode) => void;
     countryCode: CountryCode;
     inputRef: (ref: any) => void;

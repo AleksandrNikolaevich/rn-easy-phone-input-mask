@@ -19,6 +19,7 @@ export type PhoneInputProps = {
 type Handlers = {
     formatValue: (val: string | undefined) => string,
     metadata: Metadata,
+    fullMetadata: Metadata,
     setCountryCode: (country: CountryCode) => void,
     countryCode: CountryCode,
     inputRef: (ref: any) => void,
@@ -101,6 +102,15 @@ const applyMask = (value: string, mask: string) => {
 }
 
 
+const getCountryCodeByPhone = (phoneNumber: string): CountryCode | undefined => {
+    const phone = phoneNumber.replace(/\D/g, "");
+    const key = Object.keys(METADATA.country_calling_codes).find((code) => 0 === phone.indexOf(code));
+    if (!key) return undefined;
+    return METADATA.country_calling_codes[key][0]
+}
+
+const fullMetadata = getMetadata(undefined);
+
 export function getMaskPlaceholder(mask: string){
     return mask.replace(/[\[,\]]/g, "")
 }
@@ -128,14 +138,14 @@ export default function ({ value, countries, defaultCountry, onChangePhone, lang
         return getMetadata(countries, language);
     }, [countries, countries && countries.join(",")]);
 
-    const mask = metadata[countryCode].inputMask;
-    const phoneCode = metadata[countryCode].phoneCode;
+    const mask = fullMetadata[countryCode].inputMask;
+    const phoneCode = fullMetadata[countryCode].phoneCode;
 
     const [maxLength, setMaxLength] = React.useState(getMaskLength(mask));
 
     const setCountryCode = React.useCallback((country) => {
         setCountryCodeState(country);
-        setMaxLength(getMaskLength(metadata[country].inputMask))
+        setMaxLength(getMaskLength(fullMetadata[country].inputMask))
     }, [mask])
 
     const formatValue = React.useCallback((raw: string | undefined = "", withCode?: boolean): string => {
@@ -171,15 +181,24 @@ export default function ({ value, countries, defaultCountry, onChangePhone, lang
     }, [mask])
 
     React.useEffect(() => {
+
+        const country = getCountryCodeByPhone(value);
+
+        if(!!country && country !== countryCode){
+            setCountryCode(country);
+            return;
+        }
+
         const formatted = formatValue(value, true);
         inputRef.current.setNativeProps({ text: formatted })
         inputRef.current.setValue && inputRef.current.setValue(formatted)
 
-    }, [mask, value])
+    }, [mask, value, countryCode])
 
     return {
         formatValue: (val) => formatValue(val, true),
         metadata,
+        fullMetadata,
         setCountryCode,
         countryCode,
         inputRef: (ref: any) => inputRef.current = ref,

@@ -63,6 +63,14 @@ var applyMask = function (value, mask) {
     }
     return text;
 };
+var getCountryCodeByPhone = function (phoneNumber) {
+    var phone = phoneNumber.replace(/\D/g, "");
+    var key = Object.keys(METADATA.country_calling_codes).find(function (code) { return 0 === phone.indexOf(code); });
+    if (!key)
+        return undefined;
+    return METADATA.country_calling_codes[key][0];
+};
+var fullMetadata = getMetadata(undefined);
 export function getMaskPlaceholder(mask) {
     return mask.replace(/[\[,\]]/g, "");
 }
@@ -82,12 +90,12 @@ export default function (_a) {
     var metadata = React.useMemo(function () {
         return getMetadata(countries, language);
     }, [countries, countries && countries.join(",")]);
-    var mask = metadata[countryCode].inputMask;
-    var phoneCode = metadata[countryCode].phoneCode;
+    var mask = fullMetadata[countryCode].inputMask;
+    var phoneCode = fullMetadata[countryCode].phoneCode;
     var _c = React.useState(getMaskLength(mask)), maxLength = _c[0], setMaxLength = _c[1];
     var setCountryCode = React.useCallback(function (country) {
         setCountryCodeState(country);
-        setMaxLength(getMaskLength(metadata[country].inputMask));
+        setMaxLength(getMaskLength(fullMetadata[country].inputMask));
     }, [mask]);
     var formatValue = React.useCallback(function (raw, withCode) {
         if (raw === void 0) { raw = ""; }
@@ -118,13 +126,19 @@ export default function (_a) {
         });
     }, [mask]);
     React.useEffect(function () {
+        var country = getCountryCodeByPhone(value);
+        if (!!country && country !== countryCode) {
+            setCountryCode(country);
+            return;
+        }
         var formatted = formatValue(value, true);
         inputRef.current.setNativeProps({ text: formatted });
         inputRef.current.setValue && inputRef.current.setValue(formatted);
-    }, [mask, value]);
+    }, [mask, value, countryCode]);
     return {
         formatValue: function (val) { return formatValue(val, true); },
         metadata: metadata,
+        fullMetadata: fullMetadata,
         setCountryCode: setCountryCode,
         countryCode: countryCode,
         inputRef: function (ref) { return inputRef.current = ref; },
