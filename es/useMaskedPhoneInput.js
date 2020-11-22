@@ -69,7 +69,7 @@ export default function (_a) {
     var _b = React.useState(defaultCountry), countryCode = _b[0], setCountryCodeState = _b[1];
     var metadata = React.useMemo(function () {
         return getMetadata(countries, language);
-    }, [countries.join(",")]);
+    }, [countries, countries && countries.join(",")]);
     var mask = metadata[countryCode].inputMask;
     var phoneCode = metadata[countryCode].phoneCode;
     var _c = React.useState(getMaskLength(mask)), maxLength = _c[0], setMaxLength = _c[1];
@@ -96,8 +96,8 @@ export default function (_a) {
         }
         catch (e) {
         }
-        onChangePhone("+" + phoneCode + extracted, {
-            formatted: "+" + phoneCode + " " + formatted,
+        onChangePhone(extracted ? "+" + phoneCode + extracted : '', {
+            formatted: formatted ? "+" + phoneCode + " " + formatted : '',
             extracted: extracted,
             mask: "+" + phoneCode + " " + mask,
             country: countryCode,

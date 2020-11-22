@@ -10,7 +10,7 @@ import Country from "./Country";
 
 export type PhoneInputProps = {
     value: string,
-    countries: CountryCode[],
+    countries?: CountryCode[],
     defaultCountry: CountryCode,
     onChangePhone: (value: string, args: { formatted: string, extracted: string, mask: string, country?: string, code?: string, valid: boolean }) => void,
     language?:string
@@ -112,7 +112,7 @@ export default function ({ value, countries, defaultCountry, onChangePhone, lang
 
     const metadata = React.useMemo(() => {
         return getMetadata(countries, language);
-    }, [countries.join(",")]);
+    }, [countries, countries && countries.join(",")]);
 
     const mask = metadata[countryCode].inputMask;
     const phoneCode = metadata[countryCode].phoneCode;
@@ -146,8 +146,8 @@ export default function ({ value, countries, defaultCountry, onChangePhone, lang
 
         }
 
-        onChangePhone(`+${phoneCode}${extracted}`, { 
-            formatted: `+${phoneCode} ${formatted}`, 
+        onChangePhone(extracted? `+${phoneCode}${extracted}`: '', { 
+            formatted: formatted ?`+${phoneCode} ${formatted}` : '', 
             extracted, 
             mask: `+${phoneCode} ${mask}`, 
             country: countryCode, 

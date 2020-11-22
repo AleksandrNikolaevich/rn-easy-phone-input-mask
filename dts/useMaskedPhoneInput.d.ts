@@ -2,7 +2,7 @@ import { CountryCode } from "libphonenumber-js";
 import { TextInputProperties } from "react-native";
 export declare type PhoneInputProps = {
     value: string;
-    countries: CountryCode[];
+    countries?: CountryCode[];
     defaultCountry: CountryCode;
     onChangePhone: (value: string, args: {
         formatted: string;
