@@ -20,7 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/examples.mobile.json", "libphonenumber-js/metadata.mobile.json", "./source/Country"], function (require, exports, React, libphonenumber_js_1, examples_mobile_json_1, metadata_mobile_json_1, Country_1) {
+define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/examples.mobile.json", "libphonenumber-js/metadata.mobile.json", "./Country"], function (require, exports, React, libphonenumber_js_1, examples_mobile_json_1, metadata_mobile_json_1, Country_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     React = __importStar(React);

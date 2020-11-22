@@ -4,7 +4,7 @@ import { getExampleNumber, parsePhoneNumber } from "libphonenumber-js";
 import examples from 'libphonenumber-js/examples.mobile.json';
 //@ts-ignore
 import METADATA from 'libphonenumber-js/metadata.mobile.json';
-import Country from "./source/Country";
+import Country from "./Country";
 var defaultMask = '[00000000000000]';
 var getParsedMask = function (example) {
     return example

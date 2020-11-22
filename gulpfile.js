@@ -124,14 +124,14 @@ gulp.task("build-dts", function() {
 
 gulp.task("copy-src", function() {
     return gulp.src([
-        "src/assets/*.*",
+        "src/source/*.*",
     ])
     .on("error", function (err) {
         process.exit(1);
     })
-    .pipe(gulp.dest("es/assets"))
-    .pipe(gulp.dest("lib/assets"))
-    .pipe(gulp.dest("amd/assets"));
+    .pipe(gulp.dest("es/source"))
+    .pipe(gulp.dest("lib/source"))
+    .pipe(gulp.dest("amd/source"));
 });
 
 //******************************************************************************

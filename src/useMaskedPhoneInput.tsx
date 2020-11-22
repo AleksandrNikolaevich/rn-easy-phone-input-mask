@@ -5,7 +5,7 @@ import examples from 'libphonenumber-js/examples.mobile.json';
 //@ts-ignore
 import METADATA from 'libphonenumber-js/metadata.mobile.json';
 import { TextInputProperties } from "react-native";
-import Country from "./source/Country";
+import Country from "./Country";
 
 
 export type PhoneInputProps = {

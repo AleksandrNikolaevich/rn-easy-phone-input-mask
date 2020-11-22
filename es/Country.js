@@ -1,9 +1,9 @@
-//@ts-ignore
-import en from "./en.json";
+import en from "./source/en.json";
 var Country = /** @class */ (function () {
     function Country() {
     }
     Country.getCountryName = function (iso2) {
+        //@ts-ignore
         return en[iso2] || "<NotFound:" + iso2 + ">";
     };
     return Country;
