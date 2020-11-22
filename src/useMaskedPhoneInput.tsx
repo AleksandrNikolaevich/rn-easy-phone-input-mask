@@ -108,7 +108,7 @@ export function getMaskPlaceholder(mask: string){
 
 export function getCountryCodeByPhoneCode(code: string): CountryCode | undefined {
     try{
-        const countries = METADATA.country_calling_codes[code.replace(/+/g, "")];
+        const countries = METADATA.country_calling_codes[code.replace(/\D/g, "")];
         return countries[0]
     }catch(e){
         

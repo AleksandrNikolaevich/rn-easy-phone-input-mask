@@ -92,7 +92,7 @@ define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/e
     exports.getMaskPlaceholder = getMaskPlaceholder;
     function getCountryCodeByPhoneCode(code) {
         try {
-            var countries = metadata_mobile_json_1.default.country_calling_codes[code.replace(/+/g, "")];
+            var countries = metadata_mobile_json_1.default.country_calling_codes[code.replace(/\D/g, "")];
             return countries[0];
         }
         catch (e) {

@@ -68,7 +68,7 @@ export function getMaskPlaceholder(mask) {
 }
 export function getCountryCodeByPhoneCode(code) {
     try {
-        var countries = METADATA.country_calling_codes[code.replace(/+/g, "")];
+        var countries = METADATA.country_calling_codes[code.replace(/\D/g, "")];
         return countries[0];
     }
     catch (e) {
