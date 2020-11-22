@@ -1,0 +1,45 @@
+{
+  "name": "@alexzunik/rn-easy-phone-input-mask",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp",
+    "publish": "npm publish --access public"
+  },
+  "jsnext:main": "es/index.js",
+  "typings": "./dts/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleksandrNikolaevich/rn-easy-phone-input-mask.git"
+  },
+  "devDependencies": {
+    "@types/react-native": "^0.60.25",
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-tslint": "^8.1.3",
+    "gulp-typescript": "^5.0.0-alpha.3",
+    "libphonenumber-js": "^1.4.9",
+    "run-sequence": "^2.2.1",
+    "tslint": "^5.11.0",
+    "typescript": "^4.0.5"
+  },
+  "dependencies": {},
+  "description": "This set of tools makes it easy to add a mask to your text field. This is a JS only solution.",
+  "bugs": {
+    "url": "https://github.com/AleksandrNikolaevich/rn-easy-phone-input-mask/issues"
+  },
+  "homepage": "https://github.com/AleksandrNikolaevich/rn-easy-phone-input-mask#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "keywords": [
+    "notify",
+    "notification",
+    "push",
+    "alert",
+    "toast"
+  ],
+  "author": "aleksandr.nikolaevich.ch@gmail.com",
+  "license": "MIT"
+}
