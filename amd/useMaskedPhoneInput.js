@@ -23,6 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/examples.mobile.json", "libphonenumber-js/metadata.mobile.json", "./Country"], function (require, exports, React, libphonenumber_js_1, examples_mobile_json_1, metadata_mobile_json_1, Country_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.getCountryCodeByPhoneCode = exports.getMaskPlaceholder = void 0;
     React = __importStar(React);
     examples_mobile_json_1 = __importDefault(examples_mobile_json_1);
     metadata_mobile_json_1 = __importDefault(metadata_mobile_json_1);
@@ -85,6 +86,20 @@ define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/e
         }
         return text;
     };
+    function getMaskPlaceholder(mask) {
+        return mask.replace(/[\[,\]]/g, "");
+    }
+    exports.getMaskPlaceholder = getMaskPlaceholder;
+    function getCountryCodeByPhoneCode(code) {
+        try {
+            var countries = metadata_mobile_json_1.default.country_calling_codes[code.replace(/+/g, "")];
+            return countries[0];
+        }
+        catch (e) {
+        }
+        return undefined;
+    }
+    exports.getCountryCodeByPhoneCode = getCountryCodeByPhoneCode;
     function default_1(_a) {
         var value = _a.value, countries = _a.countries, defaultCountry = _a.defaultCountry, onChangePhone = _a.onChangePhone, language = _a.language;
         var inputRef = React.useRef();

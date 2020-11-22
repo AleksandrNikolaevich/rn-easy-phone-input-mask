@@ -101,6 +101,20 @@ const applyMask = (value: string, mask: string) => {
 }
 
 
+export function getMaskPlaceholder(mask: string){
+    return mask.replace(/[\[,\]]/g, "")
+}
+
+
+export function getCountryCodeByPhoneCode(code: string): CountryCode | undefined {
+    try{
+        const countries = METADATA.country_calling_codes[code.replace(/+/g, "")];
+        return countries[0]
+    }catch(e){
+        
+    }
+    return undefined
+}
 
 
 export default function ({ value, countries, defaultCountry, onChangePhone, language }: PhoneInputProps): TextInputProperties & Handlers {

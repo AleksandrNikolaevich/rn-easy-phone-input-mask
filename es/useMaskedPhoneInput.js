@@ -63,6 +63,18 @@ var applyMask = function (value, mask) {
     }
     return text;
 };
+export function getMaskPlaceholder(mask) {
+    return mask.replace(/[\[,\]]/g, "");
+}
+export function getCountryCodeByPhoneCode(code) {
+    try {
+        var countries = METADATA.country_calling_codes[code.replace(/+/g, "")];
+        return countries[0];
+    }
+    catch (e) {
+    }
+    return undefined;
+}
 export default function (_a) {
     var value = _a.value, countries = _a.countries, defaultCountry = _a.defaultCountry, onChangePhone = _a.onChangePhone, language = _a.language;
     var inputRef = React.useRef();

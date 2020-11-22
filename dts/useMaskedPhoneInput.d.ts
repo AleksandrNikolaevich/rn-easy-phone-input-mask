@@ -28,5 +28,7 @@ declare type Metadata = Record<string, {
     inputMask: string;
     countryName: string;
 }>;
+export declare function getMaskPlaceholder(mask: string): string;
+export declare function getCountryCodeByPhoneCode(code: string): CountryCode | undefined;
 export default function ({ value, countries, defaultCountry, onChangePhone, language }: PhoneInputProps): TextInputProperties & Handlers;
 export {};
