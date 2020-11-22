@@ -5,7 +5,7 @@
 ### Installation
 
 ```sh
-npm i --save @alexzunik/easy-phone-input-mask
+npm i --save @alexzunik/rn-easy-phone-input-mask
 ```
 
 
