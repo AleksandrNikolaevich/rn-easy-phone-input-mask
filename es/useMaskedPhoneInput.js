@@ -139,7 +139,7 @@ export default function (_a) {
         formatValue: function (val) { return formatValue(val, true); },
         metadata: metadata,
         fullMetadata: fullMetadata,
-        setCountryCode: setCountryCode,
+        setCountryCode: function (code) { setCountryCode(code); onChangeText(""); },
         countryCode: countryCode,
         inputRef: function (ref) { return inputRef.current = ref; },
         onChangeText: onChangeText,

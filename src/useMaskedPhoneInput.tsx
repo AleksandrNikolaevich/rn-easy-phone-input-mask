@@ -13,7 +13,7 @@ export type PhoneInputProps = {
     countries?: CountryCode[],
     defaultCountry: CountryCode,
     onChangePhone: (value: string, args: { formatted: string, extracted: string, mask: string, country?: string, code?: string, valid: boolean }) => void,
-    language?:string
+    language?: string
 }
 
 type Handlers = {
@@ -111,17 +111,17 @@ const getCountryCodeByPhone = (phoneNumber: string): CountryCode | undefined => 
 
 const fullMetadata = getMetadata(undefined);
 
-export function getMaskPlaceholder(mask: string){
+export function getMaskPlaceholder(mask: string) {
     return mask.replace(/[\[,\]]/g, "")
 }
 
 
 export function getCountryCodeByPhoneCode(code: string): CountryCode | undefined {
-    try{
+    try {
         const countries = METADATA.country_calling_codes[code.replace(/\D/g, "")];
         return countries[0]
-    }catch(e){
-        
+    } catch (e) {
+
     }
     return undefined
 }
@@ -170,13 +170,13 @@ export default function ({ value, countries, defaultCountry, onChangePhone, lang
 
         }
 
-        onChangePhone(extracted? `+${phoneCode}${extracted}`: '', { 
-            formatted: formatted ?`+${phoneCode} ${formatted}` : '', 
-            extracted, 
-            mask: `+${phoneCode} ${mask}`, 
-            country: countryCode, 
-            code: `+${phoneCode}`, 
-            valid 
+        onChangePhone(extracted ? `+${phoneCode}${extracted}` : '', {
+            formatted: formatted ? `+${phoneCode} ${formatted}` : '',
+            extracted,
+            mask: `+${phoneCode} ${mask}`,
+            country: countryCode,
+            code: `+${phoneCode}`,
+            valid
         })
     }, [mask])
 
@@ -184,7 +184,7 @@ export default function ({ value, countries, defaultCountry, onChangePhone, lang
 
         const country = getCountryCodeByPhone(value);
 
-        if(!!country && country !== countryCode){
+        if (!!country && country !== countryCode) {
             setCountryCode(country);
             return;
         }
@@ -199,7 +199,7 @@ export default function ({ value, countries, defaultCountry, onChangePhone, lang
         formatValue: (val) => formatValue(val, true),
         metadata,
         fullMetadata,
-        setCountryCode,
+        setCountryCode: (code) => { setCountryCode(code); onChangeText(""); },
         countryCode,
         inputRef: (ref: any) => inputRef.current = ref,
         onChangeText,

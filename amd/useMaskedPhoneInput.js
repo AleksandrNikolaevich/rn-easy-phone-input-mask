@@ -164,7 +164,7 @@ define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/e
             formatValue: function (val) { return formatValue(val, true); },
             metadata: metadata,
             fullMetadata: fullMetadata,
-            setCountryCode: setCountryCode,
+            setCountryCode: function (code) { setCountryCode(code); onChangeText(""); },
             countryCode: countryCode,
             inputRef: function (ref) { return inputRef.current = ref; },
             onChangeText: onChangeText,
