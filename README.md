@@ -20,7 +20,7 @@ This set of tools makes it easy to add a mask to your text field. This is a JS o
 ### Usage
 
 ```
-import useMaskedPhoneInput, { PhoneInputProps } from "./useMaskedPhoneInput";
+import { useMaskedPhoneInput, PhoneInputProps } from "@alexzunik/rn-easy-phone-input-mask";
 
 const PhoneField: React.FC<TextFieldProps & PhoneInputProps> = ({ value, onChangePhone, countries, defaultCountry, language, ...inputProps }) => {
 
