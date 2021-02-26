@@ -1,11 +1,27 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 import * as React from "react";
 import { getExampleNumber, parsePhoneNumber } from "libphonenumber-js";
 //@ts-ignore
 import examples from 'libphonenumber-js/examples.mobile.json';
 //@ts-ignore
 import METADATA from 'libphonenumber-js/metadata.mobile.json';
+//@ts-ignore
+import overrideExamples from './source/override-examples.json';
 import Country from "./Country";
 var defaultMask = '[00000000000000]';
+var getExamples = function () {
+    return __assign(__assign({}, examples), overrideExamples);
+};
 var getParsedMask = function (example) {
     return example
         .formatInternational()
@@ -19,7 +35,7 @@ var getParsedMask = function (example) {
 var getCountryMaskBycode = function (code, defaultMask) {
     if (!code)
         return defaultMask;
-    var example = getExampleNumber(code, examples);
+    var example = getExampleNumber(code, getExamples());
     if (!example)
         return defaultMask;
     var mask = getParsedMask(example);

@@ -4,6 +4,8 @@ import { CountryCode, PhoneNumber, getExampleNumber, parsePhoneNumber } from "li
 import examples from 'libphonenumber-js/examples.mobile.json';
 //@ts-ignore
 import METADATA from 'libphonenumber-js/metadata.mobile.json';
+//@ts-ignore
+import overrideExamples from './source/override-examples.json';
 import { TextInputProperties } from "react-native";
 import Country from "./Country";
 
@@ -35,6 +37,12 @@ type Metadata = Record<string, {
 
 const defaultMask = '[00000000000000]';
 
+const getExamples = () => {
+    return {
+        ...examples,
+        ...overrideExamples
+    }
+}
 
 const getParsedMask = (example: PhoneNumber) => {
     return example
@@ -50,7 +58,7 @@ const getParsedMask = (example: PhoneNumber) => {
 const getCountryMaskBycode = (code: CountryCode | undefined, defaultMask: string) => {
 
     if (!code) return defaultMask
-    const example = getExampleNumber(code, examples);
+    const example = getExampleNumber(code, getExamples());
     if (!example) return defaultMask;
     const mask = getParsedMask(example);
     mask.splice(0, 1, example.countryCallingCode.toString());

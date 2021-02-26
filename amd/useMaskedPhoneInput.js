@@ -1,3 +1,14 @@
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
@@ -20,15 +31,19 @@ var __importStar = (this && this.__importStar) || function (mod) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/examples.mobile.json", "libphonenumber-js/metadata.mobile.json", "./Country"], function (require, exports, React, libphonenumber_js_1, examples_mobile_json_1, metadata_mobile_json_1, Country_1) {
+define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/examples.mobile.json", "libphonenumber-js/metadata.mobile.json", "./source/override-examples.json", "./Country"], function (require, exports, React, libphonenumber_js_1, examples_mobile_json_1, metadata_mobile_json_1, override_examples_json_1, Country_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.getCountryCodeByPhoneCode = exports.getMaskPlaceholder = void 0;
     React = __importStar(React);
     examples_mobile_json_1 = __importDefault(examples_mobile_json_1);
     metadata_mobile_json_1 = __importDefault(metadata_mobile_json_1);
+    override_examples_json_1 = __importDefault(override_examples_json_1);
     Country_1 = __importDefault(Country_1);
     var defaultMask = '[00000000000000]';
+    var getExamples = function () {
+        return __assign(__assign({}, examples_mobile_json_1.default), override_examples_json_1.default);
+    };
     var getParsedMask = function (example) {
         return example
             .formatInternational()
@@ -42,7 +57,7 @@ define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/e
     var getCountryMaskBycode = function (code, defaultMask) {
         if (!code)
             return defaultMask;
-        var example = libphonenumber_js_1.getExampleNumber(code, examples_mobile_json_1.default);
+        var example = libphonenumber_js_1.getExampleNumber(code, getExamples());
         if (!example)
             return defaultMask;
         var mask = getParsedMask(example);
