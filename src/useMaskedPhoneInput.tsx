@@ -49,9 +49,9 @@ const getParsedMask = (example: PhoneNumber) => {
         .formatInternational()
         .replace(/-/g, " ")
         .split(" ")
-        .map((item, i) => {
+        .map((item, i, items) => {
             const mask = item.replace(/\D/g, "").replace(/\d/g, "0");
-            return i === 1 ? `([${mask}])` : `[${mask}]`
+            return items.length > 2 && i === 1 ? `([${mask}])` : `[${mask}]`
         })
 }
 
