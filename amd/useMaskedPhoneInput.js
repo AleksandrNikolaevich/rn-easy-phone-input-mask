@@ -49,9 +49,9 @@ define(["require", "exports", "react", "libphonenumber-js", "libphonenumber-js/e
             .formatInternational()
             .replace(/-/g, " ")
             .split(" ")
-            .map(function (item, i) {
+            .map(function (item, i, items) {
             var mask = item.replace(/\D/g, "").replace(/\d/g, "0");
-            return i === 1 ? "([" + mask + "])" : "[" + mask + "]";
+            return items.length > 2 && i === 1 ? "([" + mask + "])" : "[" + mask + "]";
         });
     };
     var getCountryMaskBycode = function (code, defaultMask) {
